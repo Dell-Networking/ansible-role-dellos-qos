@@ -11,7 +11,7 @@ Installation
 Role variables
 --------------
 
-- Role is abstracted using the *ansible_network_os*/ *ansible_net_os_name* variable that can take a dellos10 value
+- Role is abstracted using the *ansible_network_os* variable that can take a dellos10 value
 - If *dellos_cfg_generate* is set to true, the variable generates the role configuration commands in a file
 - Any role variable with a corresponding state variable set to absent negates the configuration of that variable 
 - Setting an empty value for any variable negates the corresponding configuration
@@ -58,13 +58,13 @@ The *dellos-qos* role is built on modules included in the core Ansible code. The
 Example playbook
 ----------------
 
-This example uses the *dellos.dellos-qos* role to configure the policy-map class-map. It creates a *hosts* file with the switch details and corresponding variables. The hosts file should define the *ansible_network_os*/*ansible_net_os_name* variable with corresponding Dell EMC networking OS name. 
+This example uses the *dellos.dellos-qos* role to configure the policy-map class-map. It creates a *hosts* file with the switch details and corresponding variables. The hosts file should define the *ansible_network_os* variable with corresponding Dell EMC networking OS name. 
 
 When *dellos_cfg_generate* is set to true, the variable generates the configuration commands as a .part file in *build_dir* path. By default, the variable is set to false. It writes a simple playbook that only references the *dellos-qos* role. By including the role, you automatically get access to all of the tasks to configure QoS features. 
 
 **Sample hosts file**
  
-    leaf1 ansible_host= <ip_address> ansible_net_os_name= <OS name(dellos10)>
+    leaf1 ansible_host= <ip_address> 
 
 **Sample host_vars/leaf1**
 
