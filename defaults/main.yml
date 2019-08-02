@@ -1,2 +1,5 @@
 ---
 # defaults file for ansible-role-dellos-qos
+match_type:
+  match_all: match-all
+  match_any: match-any
