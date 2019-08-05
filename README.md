@@ -1,7 +1,7 @@
 QoS role
 ========
 
-This role facilitates the configuration quality of service (QoS) attributes like policy-map and class-map. This role is abstracted for dellos10. The QoS role requires an SSH connection for connectivity to a Dell EMC Networking device. You can use any of the built-in OS connection variables .
+This role facilitates the configuration quality of service (QoS) attributes like policy-map and class-map. This role is abstracted for dellos10 and dellos6. The QoS role requires an SSH connection for connectivity to a Dell EMC Networking device. You can use any of the built-in OS connection variables .
 
 Installation
 ------------
@@ -11,7 +11,7 @@ Installation
 Role variables
 --------------
 
-- Role is abstracted using the *ansible_network_os* variable that can take a dellos10 value
+- Role is abstracted using the *ansible_network_os* variable that can take a dellos10 and dellos6 values
 - If *dellos_cfg_generate* is set to true, the variable generates the role configuration commands in a file
 - Any role variable with a corresponding state variable set to absent negates the configuration of that variable 
 - Setting an empty value for any variable negates the corresponding configuration
@@ -21,14 +21,18 @@ Role variables
 
 | Key        | Type                      | Description                                             | Support               |
 |------------|---------------------------|---------------------------------------------------------|-----------------------|
-| ``policy_map`` | list | Configures the policy-map (see ``policy_map.*``) | dellos10 |
-| ``policy_map.name`` | string (required)        | Configures the policy-map name  | dellos10 |
-| ``policy_map.type`` | string: qos\*,application,control-plane,network-qos,queuing    | Configures the policy-map type  | dellos10 |
-| ``policy_map.state`` | string: present\*,absent   | Deletes the policy-map if set to absent  | dellos10 |
-| ``class_map`` | list | Configures the class-map (see ``class_map.*``) | dellos10 |
-| ``class_map.name`` | string (required)        | Configures the class-map name  | dellos10 |
-| ``class_map.type`` | string: qos\*,application,control-plane,network-qos,queuing    | Configures the class-map type  | dellos10 |
-| ``class_map.state`` | string: present\*,absent   | Deletes the class-map if set to absent  | dellos10 |
+| ``policy_map`` | list | Configures the policy-map (see ``policy_map.*``) | dellos6, dellos10 |
+| ``policy_map.name`` | string (required)        | Configures the policy-map name  | dellos6, dellos10 |
+| ``policy_map.type`` | string: qos\*, application, control-plane, network-qos, queuing in dellos10; string: in, out in dellos6   | Configures the policy-map type  | dellos6, dellos10 |
+| ``policy_map.class_instances`` | list | Specifies the class instances for the policy | dellos6 |
+| ``class_instances.name`` | string | Specifies name of class instance | dellos6 |
+| ``class_instances.policy`` | list | Specifies list of associated policies for the class | dellos6 |
+| ``policy_map.state`` | string: present\*,absent   | Deletes the policy-map if set to absent  | dellos6, dellos10 |
+| ``class_map`` | list | Configures the class-map (see ``class_map.*``) | dellos6, dellos10 |
+| ``class_map.name`` | string (required)        | Configures the class-map name  | dellos6, dellos10 |
+| ``class_map.type`` | string: qos\*,application,control-plane,network-qos,queuing in dellos10; string: match-all, match-any in dellos6    | Configures the class-map type  | dellos6, dellos10 |
+| ``class-map.match_condition`` | list | Specifies the type of match-conditions required for the class | dellos6 |
+| ``class_map.state`` | string: present\*,absent   | Deletes the class-map if set to absent  | dellos6, dellos10 |
 
 > **NOTE**: Asterisk (\*) denotes the default value if none is specified. 
 
