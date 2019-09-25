@@ -1,9 +1,7 @@
 #jinja2: trim_blocks: True,lstrip_blocks: True
 {#####################################################
-
 Purpose:
 Configure qos commands for dellos10 Devices.
-
 dellos_qos:
   policy_map:
    - name: testpolicy
@@ -13,7 +11,6 @@ dellos_qos:
    - name: testclass
      type: application
      state: present
-
 #####################################################}
 {% if dellos_qos is defined and dellos_qos %}
 {% for key in dellos_qos.keys() %}

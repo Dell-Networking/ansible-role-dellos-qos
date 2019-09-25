@@ -1,9 +1,7 @@
 #jinja2: trim_blocks: True,lstrip_blocks: True
 {#####################################################
-
 Purpose:
 Configure qos commands for dellos6 Devices.
-
 dellos_qos:
   class_map:
    - name: CONTROL
@@ -35,7 +33,6 @@ dellos_qos:
            - assign-queue 4
          state: present
      state: present
-
 #####################################################}
 {% if dellos_qos is defined and dellos_qos %}
 {% for key in dellos_qos.keys() %}
